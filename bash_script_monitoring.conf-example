@@ -1,0 +1,50 @@
+# Configuration file for "bash_script_monitoring.sh"
+# Copyright (c) 2016 Santeramo Luc (l.santeramo@brgm.fr)
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# BRGM, hereby disclaims all copyright interest in the script
+#  "bash script monitoring" written by Luc Santeramo.
+# 
+# v1.0 : initial version
+
+# IMPORTANT :
+# This file must be saved as /etc/bash_script_monitoring/bash_script_monitoring.conf
+
+# mail sender binary
+# to send an email if zabbix_sender fail
+#MAIL="/usr/bin/mailx"
+MAIL="/bin/mailx"
+
+# Email recipient if zabbix_sender fail
+# Don't forget to send a test email when setting up bash_script_monitoring on a new system, with ${MAIL}
+MAILDEST="john.doe@john.com"
+
+# Monitoring tool (zabbix|mail|...)
+# Work only with Zabbix for the moment
+MONITORING_TOOL="zabbix"
+
+# Log directory (must be writable by user !)
+LOGDIR="/var/log/bash_script_monitoring"
+
+####### Zabbix
+# zabbix_sender binary
+ZABBIX_SENDER="/usr/bin/zabbix_sender"
+# Zabbix agent configuration file
+ZABBIX_SENDER_CONF="/etc/zabbix/zabbix_agentd.conf"
+# OK value for Zabbix
+ZABBIX_OK=0
+# FAIL value for Zabbix
+ZABBIX_ERR=1
