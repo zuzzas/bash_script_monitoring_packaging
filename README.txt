@@ -40,7 +40,7 @@ Use is very simple since you don't need to rewrite all your scripts. You just ne
 - First time on the host :
   - Copy library "bash_script_monitoring.sh" in directory /usr/share/bash_script_monitoring/
   - Create configuration file /etc/bash_script_monitoring/bash_script_monitoring.conf using provided exemple configuration file
-  - Create dir /var/log/bash_script_monitoring to store automaticly generated error logs
+  - Create dir /var/log/bash_script_monitoring to store automatically generated error logs
 - On every script you need to monitor :
   - Add following line at the top of the script to be monitored
   - Adapt SCRIPTDIR variable (4th line) if needed, and -s/-c selector (5th line) : "-s" to stop on error, "-C CPT_ERR" to continue on error 
