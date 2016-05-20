@@ -53,7 +53,7 @@ fi
 #########################################
 
 # Check file presence
-for file in ${ZABBIX_SENDER_CONF} ${MAIL} ${ZABBIX_SENDER}
+for file in ${BSMZABBIX_SENDER_CONF} ${BSMMAIL} ${BSMZABBIX_SENDER}
 do
 	if [ ! -e ${file} ] 
 	then
@@ -63,20 +63,20 @@ do
 done
 
 # Check log dir
-if [ ! -w ${LOGDIR} ] 
+if [ ! -w ${BSMLOGDIR} ] 
 then
-	echo "${LOGDIR} does not exist or is not writeable by $(whoami)" 
+	echo "${BSMLOGDIR} does not exist or is not writeable by $(whoami)" 
 	exit
 fi
 
 # Command line to report script execution status regarding monitoring tool used
-case ${MONITORING_TOOL} in
+case ${BSMMONITORING_TOOL} in
 	"zabbix" )
-		execution_status_report_ok="custom_zabbix_sender -o ${ZABBIX_OK}"
-		execution_status_report_nok="custom_zabbix_sender -o ${ZABBIX_KO}"
+		execution_status_report_ok="custom_zabbix_sender -o ${BSMZABBIX_OK}"
+		execution_status_report_nok="custom_zabbix_sender -o ${BSMZABBIX_KO}"
 		;;
 	* )
-		echo "Monitoring tool ${MONITORING_TOOL} unknown"
+		echo "Monitoring tool ${BSMMONITORING_TOOL} unknown"
 		;;
 esac
 
@@ -117,11 +117,11 @@ function custom_zabbix_sender
 	fi
 	
 	# envoie des infos à zabbix
-	ZBXCMD="${ZABBIX_SENDER} -c ${ZABBIX_SENDER_CONF} -k ${k} -o ${o}"
+	ZBXCMD="${BSMZABBIX_SENDER} -c ${BSMZABBIX_SENDER_CONF} -k ${k} -o ${o}"
 	if ! ${ZBXCMD}
 	then
 		# L'envoie s'est mal passé, on tente d'envoyer un mail pour compenser
-		echo "cmd : ${ZBXCMD}" | ${MAIL} -s "Erreur utilisation zabbix_sender sur $(hostname)" "${MAILDEST}" > /dev/null 2>&1
+		echo "cmd : ${ZBXCMD}" | ${BSMMAIL} -s "Erreur utilisation zabbix_sender sur $(hostname)" "${BSMMAILDEST}" > /dev/null 2>&1
 	fi	
 }
 
@@ -149,12 +149,12 @@ function custom_zabbix_error_reset
 	[ -z "$k" ] && usage
 
 	# envoie des infos à zabbix
-	${ZABBIX_SENDER} -c "${ZABBIX_SENDER_CONF}" -k "${k}" -o ${ZABBIX_OK}
+	${BSMZABBIX_SENDER} -c "${BSMZABBIX_SENDER_CONF}" -k "${k}" -o ${BSMZABBIX_OK}
 }
 
 ### error_check_trap
 # Fonction de traitement des erreurs
-# Ajoute par defaut le message d'erreur a la fin du fichier de log dans ${LOGDIR}/$(basename $0)_error.log
+# Ajoute par defaut le message d'erreur a la fin du fichier de log dans ${BSMLOGDIR}/$(basename $0)_error.log
 # parametres :
 # - s : s'il est activé, stoppe l'execution du script après une erreur
 # - c : nom de la variable compteur d'erreur global : CPT_ERR (sans le $). doit etre definie si -s n'est pas positionné
@@ -192,7 +192,7 @@ function error_check_trap
 	[[ -z "$s" ]] && [[ -z "$c" ]] && echo "-c doit etre positionne si -s ne l'est pas"
 
 	# Fichier de log
-	LOGFILE="${LOGDIR}/$(basename "$0")${SCRIPT_PARAMS// /-}_error.log"
+	LOGFILE="${BSMLOGDIR}/$(basename "$0")${SCRIPT_PARAMS// /-}_error.log"
 
 	# Creation du message d'erreur
 	ERRMSG="ERREUR : script ${SCRIPTNAME}, lancé avec parametres -${SCRIPT_PARAMS:-none}-, interrompue a la ligne ${LINE}, code erreur ${RETVAL}"
@@ -201,7 +201,7 @@ function error_check_trap
 	echo "${DATE}: ${ERRMSG}, parametres de la commande en erreur : ${p}" | tee "${LOGFILE}"
 	
 	# Envoie message a zabbix
-	custom_zabbix_sender -o "${ZABBIX_ERR}"
+	custom_zabbix_sender -o "${BSMZABBIX_ERR}"
 	
 	# Incrementation du compteur d'erreur si -s n'est pas positionné
 	if [ "$s" == "true" ] 
