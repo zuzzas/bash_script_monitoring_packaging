@@ -15,8 +15,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-# BRGM, hereby disclaims all copyright interest in the script
-#  "bash script monitoring" written by Luc Santeramo.
+# Bureau de Recherches Geologiques et Minieres (BRGM), hereby disclaims all copyright
+# interest in the script  "bash script monitoring" written by Luc Santeramo.
 #
 # v1.0 : Luc Santeramo - 2016-05-03
 

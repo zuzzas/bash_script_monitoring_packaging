@@ -22,8 +22,8 @@
 # Semantia, hereby disclaims all copyright interest in the script
 #  "bash script monitoring" written by Luc Santeramo.
 # 
-# BRGM, hereby disclaims all copyright interest in the script
-#  "bash script monitoring" written by Luc Santeramo.
+# Bureau de Recherches Geologiques et Minieres (BRGM), hereby disclaims all copyright
+# interest in the script  "bash script monitoring" written by Luc Santeramo.
 # 
 # v1.0 : Luc Santeramo (luc.santeramo@revues.org)
 # v1.1 : Luc Santeramo (luc.santeramo@semantia.com) : gestion des erreurs par trap plutot qu'appel d'une fonction apres chaque commande
