@@ -21,17 +21,15 @@
 # v1.0 : Luc Santeramo - 2016-05-03
 
 
-
 ******** What is it for ? ********
 
-"bash_script_monitoring.sh" is a library designed to monitor (all?) your bash script execution (tested on GNU/Linux et Solaris) with your monitoring tool (work only with Zabbix for the moment, but is ready to be adapted for other tools).
-
+"bash_script_monitoring.sh" is a library designed to monitor (all?) your bash script execution (tested on GNU/Linux et Solaris) 
+with your monitoring tool (work only with Zabbix for the moment, but is ready to be adapted for other tools, or just email sending).
 
 
 ******** What's inside ? *********
 
 It's "just" a script using the power of "trap ERR"
-
 
 
 ******** How to use it ? *********
@@ -68,7 +66,6 @@ Common for all monitoring tools :
   - And it's done
 
 
-
 ******** What to expect ? ********
 
 - When a command in your script fails, the script stops or continues, regarding selected behavior (-s or -c), and the monitoring tool is informed (element change to 1 in zabbix).
@@ -76,5 +73,7 @@ You can find more information about the error (timestamp, parameters of script a
 - If all commands in the script run ok, the monitoring tools is informed at the end of the execution (element changed to 0 in zabbix)
 During script execution, if you need to alert the monitoring tool, simply run ${execution_status_report_ok} or ${execution_status_report_nok}
 
+
 ******** Thanks to ********
+
 - Nicolas Losantos (BRGM) for helping me on zabbix integration part
