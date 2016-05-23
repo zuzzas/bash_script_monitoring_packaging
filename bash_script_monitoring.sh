@@ -55,7 +55,7 @@ fi
 # Check file presence
 for file in ${BSMZABBIX_SENDER_CONF} ${BSMMAIL} ${BSMZABBIX_SENDER}
 do
-	if [ ! -e ${file} ] 
+	if [ ! -e "${file}" ] 
 	then
 		echo "${file} does not exist"
 		exit
@@ -63,7 +63,7 @@ do
 done
 
 # Check log dir
-if [ ! -w ${BSMLOGDIR} ] 
+if [ ! -w "${BSMLOGDIR}" ] 
 then
 	echo "${BSMLOGDIR} does not exist or is not writeable by $(whoami)" 
 	exit
@@ -73,7 +73,7 @@ fi
 case ${BSMMONITORING_TOOL} in
 	"zabbix" )
 		execution_status_report_ok="custom_zabbix_sender -o ${BSMZABBIX_OK}"
-		execution_status_report_nok="custom_zabbix_sender -o ${BSMZABBIX_KO}"
+		execution_status_report_nok="custom_zabbix_sender -o ${BSMZABBIX_NOK}"
 		;;
 	* )
 		echo "Monitoring tool ${BSMMONITORING_TOOL} unknown"
@@ -149,7 +149,7 @@ function custom_zabbix_error_reset
 	[ -z "$k" ] && usage
 
 	# envoie des infos à zabbix
-	${BSMZABBIX_SENDER} -c "${BSMZABBIX_SENDER_CONF}" -k "${k}" -o ${BSMZABBIX_OK}
+	${BSMZABBIX_SENDER} -c "${BSMZABBIX_SENDER_CONF}" -k "${k}" -o "${BSMZABBIX_OK}"
 }
 
 ### error_check_trap
@@ -201,7 +201,7 @@ function error_check_trap
 	echo "${DATE}: ${ERRMSG}, parametres de la commande en erreur : ${p}" | tee "${LOGFILE}"
 	
 	# Envoie message a zabbix
-	custom_zabbix_sender -o "${BSMZABBIX_ERR}"
+	custom_zabbix_sender -o "${BSMZABBIX_NOK}"
 	
 	# Incrementation du compteur d'erreur si -s n'est pas positionné
 	if [ "$s" == "true" ] 

@@ -46,5 +46,5 @@ BSMZABBIX_SENDER="/usr/bin/zabbix_sender"
 BSMZABBIX_SENDER_CONF="/etc/zabbix/zabbix_agentd.conf"
 # OK value for Zabbix
 BSMZABBIX_OK=0
-# FAIL value for Zabbix
-BSMZABBIX_ERR=1
+# Not OK value for Zabbix
+BSMZABBIX_NOK=1
