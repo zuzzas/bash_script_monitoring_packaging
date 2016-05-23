@@ -34,7 +34,9 @@ It's "just" a script using the power of "trap ERR"
 
 ******** How to use it ? *********
 
-Use is very simple since you don't need to rewrite all your scripts. You just need to :
+Use is very simple since you don't need to rewrite all your scripts : this could be sum up as "add 2 lines at the top, and 1 at the bottom of your script"
+
+2 examples scripts are provided, but precisely you just need to (considering your monitoring environment is ready):
 - First time on the host :
   - Copy library "bash_script_monitoring.sh" in directory /usr/share/bash_script_monitoring/
   - Create configuration file /etc/bash_script_monitoring/bash_script_monitoring.conf using provided exemple configuration file
@@ -68,10 +70,12 @@ Common for all monitoring tools :
 
 ******** What to expect ? ********
 
-- When a command in your script fails, the script stops or continues, regarding selected behavior (-s or -c), and the monitoring tool is informed (element change to 1 in zabbix).
+- When a command in your script fails with nonzero return value (outside an "if",|| or &&), the script stops or continues, regarding selected behavior (-s or -c), and the monitoring tool is informed (element change to 1 in zabbix).
 You can find more information about the error (timestamp, parameters of script and failing command, error line) in /var/log/bash_script_monitoring.
 - If all commands in the script run ok, the monitoring tools is informed at the end of the execution (element changed to 0 in zabbix)
-During script execution, if you need to alert the monitoring tool, simply run ${execution_status_report_ok} or ${execution_status_report_nok}
+
+During script execution, if you need to alert the monitoring tool for something that is not already handled automatically, 
+simply run ${execution_status_report_ok} or ${execution_status_report_nok}
 
 
 ******** Thanks to ********
