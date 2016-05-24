@@ -24,6 +24,7 @@
 # 
 # Bureau de Recherches Geologiques et Minieres (BRGM), hereby disclaims all copyright
 # interest in the script  "bash script monitoring" written by Luc Santeramo.
+
 # 
 # v1.0 : Luc Santeramo (luc.santeramo@revues.org)
 # v1.1 : Luc Santeramo (luc.santeramo@semantia.com) : gestion des erreurs par trap plutot qu'appel d'une fonction apres chaque commande
@@ -110,7 +111,7 @@ function custom_zabbix_sender
 	# creation de la cle si elle n'est pas en parametre : user.-chemin-du-script.nom_du_script(.params)
 	if [ -z "$k" ] 
 	then
-		SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[1]}" )" && pwd )"
+		SCRIPTDIR="$( cd "$( dirname "$0" )" && pwd )"
 		SCRIPTNAME="$(basename "$0")"
 		k="$(whoami).${SCRIPTDIR//\//-}.${SCRIPTNAME}"
 		[[ "${SCRIPT_PARAMS}x" == "x" ]] || k="${k}.${SCRIPT_PARAMS// /-}"
