@@ -1,0 +1,11 @@
+zabbix-script-monitoring (1.0-2) jessie-backports; urgency=medium
+
+  * jessie release
+
+ -- Andrey Klimentev <andrei650816@gmail.com>  Thu, 16 Feb 2017 10:59:13 +0000
+
+zabbix-script-monitoring (1.0-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Andrey Klimentev <andrei650816@gmail.com>  Thu, 16 Feb 2017 10:31:16 +0000
